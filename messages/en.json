@@ -1,0 +1,48 @@
+{
+  "Index": {
+    "title": "Mega Streams - Premium IPTV Experience",
+    "description": "Unlock a world of entertainment with over 22,000+ live channels and 120,000+ VODs in 4K quality. Fast, reliable, and buffer-free.",
+    "getTrial": "Get 24h Free Trial",
+    "buyNow": "Buy Now",
+    "features": {
+      "channels": "22,000+ Channels",
+      "vod": "120,000+ VOD",
+      "quality": "4K/8K Quality",
+      "antifreeze": "Anti-Freeze Tech",
+      "instant": "Instant Activation",
+      "support": "24/7 Live Support"
+    },
+    "pricing": {
+      "title": "Choose Your Plan",
+      "currency": "$",
+      "1month": "1 Month Plan",
+      "1monthPrice": "7",
+      "3months": "3 Months Plan",
+      "3monthsPrice": "13",
+      "6months": "6 Months Plan",
+      "6monthsPrice": "20",
+      "12months": "12 Months Plan",
+      "12monthsPrice": "30",
+      "popular": "Most Popular"
+    },
+    "devices": {
+      "title": "Works On All Your Devices",
+      "android": "Android TV & Box",
+      "firestick": "Amazon Firestick",
+      "smarttv": "Smart TV (Samsung/LG)",
+      "mobile": "iOS & Android Mobile",
+      "pc": "Windows & Mac PC"
+    },
+    "stats": {
+      "users": "10k+ Happy Users",
+      "uptime": "99.9% Uptime",
+      "channels": "22k+ Channels"
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  }
+}

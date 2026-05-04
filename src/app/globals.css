@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --neon-purple: #b026ff;
+  --neon-red: #ff003c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-red: var(--neon-red);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --shadow-neon-purple: 0 0 5px #b026ff, 0 0 20px #b026ff;
+  --shadow-neon-red: 0 0 5px #ff003c, 0 0 20px #ff003c;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@layer utilities {
+  .text-glow-purple {
+    text-shadow: 0 0 10px rgba(176, 38, 255, 0.8);
+  }
+  .text-glow-red {
+    text-shadow: 0 0 10px rgba(255, 0, 60, 0.8);
+  }
+  .box-glow-purple {
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
+  }
+  .box-glow-red {
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+  }
+}
