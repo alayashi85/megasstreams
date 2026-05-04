@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Cairo } from "next/font/google";
 import "../globals.css";
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import {getMessages, setRequestLocale} from 'next-intl/server';
 import {routing} from '@/i18n/routing';
-import {notFound} from 'next/navigation';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +20,10 @@ const cairo = Cairo({
   subsets: ["arabic", "latin"],
 });
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return [{locale: 'en'}, {locale: 'ar'}];
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -63,13 +64,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
     },
   };
 }
@@ -83,10 +77,8 @@ export default async function RootLayout({
 }) {
   const {locale} = await params;
 
-  // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
-  }
+  // Enable static rendering
+  setRequestLocale(locale);
 
   // Providing all messages to the client
   // side is the easiest way to get started
@@ -98,7 +90,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={direction} className={`${geistSans.variable} ${geistMono.variable} ${cairo.variable} h-full antialiased`}>
       <body className={`${fontClass} min-h-full flex flex-col bg-[#0a0a0a] text-white`}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>
       </body>

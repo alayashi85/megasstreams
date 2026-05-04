@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import NeonButton from '@/components/NeonButton';
@@ -7,8 +7,17 @@ import FeatureCard from '@/components/FeatureCard';
 import PricingCard from '@/components/PricingCard';
 import { Tv, Film, Monitor, Shield, Zap, Infinity, Users, Activity, CheckCircle } from 'lucide-react';
 
-export default function Home() {
-  const t = useTranslations('Index');
+export default async function Home({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}) {
+  const {locale} = await params;
+  
+  // Enable static rendering
+  setRequestLocale(locale);
+  
+  const t = await getTranslations('Index');
 
   const features = [
     { icon: Tv, title: t('features.channels') },
