@@ -82,7 +82,7 @@ export default async function RootLayout({
 
   // Providing all messages to the client
   // side is the easiest way to get started
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
 
   const direction = locale === 'ar' ? 'rtl' : 'ltr';
   const fontClass = locale === 'ar' ? cairo.className : geistSans.className;
