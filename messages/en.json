@@ -16,13 +16,13 @@
       "title": "Choose Your Plan",
       "currency": "USD",
       "1month": "1 Month Plan",
-      "1monthPrice": "10.50",
+      "1monthPrice": "10.99",
       "3months": "3 Months Plan",
-      "3monthsPrice": "19.50",
+      "3monthsPrice": "19.99",
       "6months": "6 Months Plan",
-      "6monthsPrice": "30",
+      "6monthsPrice": "29.99",
       "12months": "12 Months Plan",
-      "12monthsPrice": "45",
+      "12monthsPrice": "44.99",
       "popular": "Featured plan"
     },
     "devices": {
