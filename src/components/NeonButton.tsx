@@ -1,35 +1,30 @@
-'use client';
-
-import React from 'react';
-import { motion } from 'framer-motion';
-
+import React from "react";
 interface NeonButtonProps {
   children: React.ReactNode;
-  variant?: 'purple' | 'red';
-  onClick?: () => void;
+  variant?: "purple" | "red";
+  href: string;
   className?: string;
+  external?: boolean;
 }
-
-const NeonButton: React.FC<NeonButtonProps> = ({ 
-  children, 
-  variant = 'purple', 
-  onClick,
-  className = ''
-}) => {
-  const colorClass = variant === 'purple' 
-    ? 'border-neon-purple text-neon-purple hover:bg-neon-purple/20 box-glow-purple' 
-    : 'border-neon-red text-neon-red hover:bg-neon-red/20 box-glow-red';
-
+export default function NeonButton({
+  children,
+  variant = "purple",
+  href,
+  className = "",
+  external = false,
+}: NeonButtonProps) {
+  const color =
+    variant === "purple"
+      ? "border-neon-purple text-white hover:bg-neon-purple/20"
+      : "border-neon-red text-white hover:bg-neon-red/20";
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onClick}
-      className={`px-8 py-3 rounded-full border-2 font-bold transition-all duration-300 ${colorClass} ${className}`}
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={`inline-flex min-h-12 items-center justify-center rounded-full border-2 px-6 py-3 text-center font-bold transition-colors ${color} ${className}`}
     >
       {children}
-    </motion.button>
+    </a>
   );
-};
-
-export default NeonButton;
+}
