@@ -1,216 +1,208 @@
-import React from 'react';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import NeonButton from '@/components/NeonButton';
-import FeatureCard from '@/components/FeatureCard';
-import PricingCard from '@/components/PricingCard';
-import { Tv, Film, Monitor, Shield, Zap, Infinity, Users, Activity, CheckCircle } from 'lucide-react';
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import NeonButton from "@/components/NeonButton";
+import FeatureCard from "@/components/FeatureCard";
+import PricingCard from "@/components/PricingCard";
+import { Tv, Film, Monitor, Shield, Zap, MessageCircle } from "lucide-react";
+import { siteUrl, whatsappUrl } from "@/lib/site";
 
 export default async function Home({
-  params
+  params,
 }: {
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
-  const {locale} = await params;
-  
-  // Enable static rendering
+  const { locale } = await params;
   setRequestLocale(locale);
-  
-  const t = await getTranslations('Index');
-
-  const features = [
-    { icon: Tv, title: t('features.channels') },
-    { icon: Film, title: t('features.vod') },
-    { icon: Monitor, title: t('features.quality') },
-    { icon: Shield, title: t('features.antifreeze') },
-    { icon: Zap, title: t('features.instant') },
-    { icon: Infinity, title: t('features.support') },
+  const t = await getTranslations("Index");
+  const features = [Tv, Film, Monitor, Shield, Zap, MessageCircle];
+  const featureKeys = [
+    "channels",
+    "vod",
+    "quality",
+    "antifreeze",
+    "instant",
+    "support",
   ];
-
-  const pricingPlans = [
-    { duration: t('pricing.1month'), price: t('pricing.1monthPrice'), popular: false },
-    { duration: t('pricing.3months'), price: t('pricing.3monthsPrice'), popular: false },
-    { duration: t('pricing.6months'), price: t('pricing.6monthsPrice'), popular: true },
-    { duration: t('pricing.12months'), price: t('pricing.12monthsPrice'), popular: false },
-  ];
-
-  const commonFeatures = [
-    "22,000+ Live Channels",
-    "120,000+ VODs",
-    "4K / 8K / FHD Quality",
-    "All Devices Supported",
-    "Anti-Freeze System",
-    "EPG Guide Included"
-  ];
-
-  const whatsappLink = "https://wa.me/9647800302092"; // Placeholder
-
+  const plans = ["1month", "3months", "6months", "12months"].map((key) => ({
+    duration: t(`pricing.${key}`),
+    price: t(`pricing.${key}Price`),
+    key,
+  }));
+  const steps = t.raw("steps") as { title: string; body: string }[];
+  const faq = t.raw("faq") as { q: string; a: string }[];
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Mega Streams IPTV Subscription",
-    "description": t('description'),
-    "brand": {
-      "@type": "Brand",
-      "name": "Mega Streams"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "lowPrice": "10.99",
-      "highPrice": "50.99",
-      "priceCurrency": "USD",
-      "offerCount": "4"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "1250"
-    }
+    "@type": "Service",
+    name: "Mega Streams IPTV",
+    description: t("description"),
+    url: `${siteUrl}/${locale}`,
+    provider: { "@type": "Organization", name: "Mega Streams", url: siteUrl },
+    offers: plans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.duration,
+      price:
+        t("pricing.currency") === "IQD"
+          ? plan.price.replaceAll(".", "")
+          : plan.price,
+      priceCurrency: t("pricing.currency"),
+      url: `${siteUrl}/${locale}#pricing`,
+    })),
   };
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\u003c"),
+        }}
       />
+      <a href="#main-content" className="skip-link">
+        {t("skip")}
+      </a>
       <Navbar />
-      
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-20">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-purple rounded-full blur-[120px]"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-red rounded-full blur-[120px]"></div>
-          </div>
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-5xl lg:text-7xl font-extrabold mb-6 leading-tight">
-              {t('title').split('-')[0]}
-              <span className="block bg-gradient-to-r from-neon-purple to-neon-red bg-clip-text text-transparent">
-                {t('title').split('-')[1]}
-              </span>
-            </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-              {t('description')}
+      <main id="main-content" className="flex-grow" tabIndex={-1}>
+        <section className="relative overflow-hidden pt-32 pb-16 lg:pt-48 lg:pb-24">
+          <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+            <p className="mb-5 text-sm font-semibold tracking-widest text-purple-300">
+              MEGA STREAMS
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                <NeonButton variant="purple">
-                  {t('getTrial')}
-                </NeonButton>
-              </a>
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                <NeonButton variant="red">
-                  {t('buyNow')}
-                </NeonButton>
-              </a>
-            </div>
-            
-            {/* Stats */}
-            <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="flex flex-col items-center">
-                <Users className="text-neon-purple mb-2" size={32} />
-                <span className="text-2xl font-bold">{t('stats.users')}</span>
-              </div>
-              <div className="flex flex-col items-center border-x border-white/10 px-8">
-                <Activity className="text-neon-red mb-2" size={32} />
-                <span className="text-2xl font-bold">{t('stats.uptime')}</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <CheckCircle className="text-neon-purple mb-2" size={32} />
-                <span className="text-2xl font-bold">{t('stats.channels')}</span>
-              </div>
+            <h1 className="mb-6 text-4xl leading-tight font-extrabold sm:text-5xl lg:text-6xl">
+              {t("title")}
+            </h1>
+            <p className="mx-auto mb-9 max-w-2xl text-lg leading-relaxed text-gray-300">
+              {t("description")}
+            </p>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <NeonButton href={whatsappUrl(t("trialMessage"))} external>
+                {t("getTrial")}
+              </NeonButton>
+              <NeonButton href="#pricing" variant="red">
+                {t("pricing.title")}
+              </NeonButton>
             </div>
           </div>
         </section>
-
-        {/* Features Section */}
-        <section id="features" className="py-24 bg-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Powerful Features</h2>
-              <p className="text-gray-400">Everything you need for the perfect streaming experience.</p>
+        <section id="features" className="bg-white/5 py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 text-center">
+              <h2 className="mb-4 text-3xl font-bold">{t("featuresTitle")}</h2>
+              <p className="text-gray-300">{t("featuresIntro")}</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <FeatureCard 
-                  key={index}
-                  icon={feature.icon}
-                  title={feature.title}
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {features.map((Icon, index) => (
+                <FeatureCard
+                  key={featureKeys[index]}
+                  icon={Icon}
+                  title={t(`features.${featureKeys[index]}`)}
                 />
               ))}
             </div>
           </div>
         </section>
-
-        {/* Pricing Section */}
-        <section id="pricing" className="py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">{t('pricing.title')}</h2>
-              <p className="text-gray-400">Simple and transparent pricing for everyone.</p>
+        <section id="pricing" className="py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-3xl font-bold">{t("pricing.title")}</h2>
+              <p className="text-gray-300">{t("pricingIntro")}</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {pricingPlans.map((plan, index) => (
-                <PricingCard 
-                  key={index}
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {plans.map((plan) => (
+                <PricingCard
+                  key={plan.key}
                   duration={plan.duration}
                   price={plan.price}
-                  currency={t('pricing.currency')}
-                  isPopular={plan.popular}
-                  features={commonFeatures}
-                  buttonText={t('buyNow')}
+                  currency={t("pricing.currency")}
+                  isPopular={plan.key === "6months"}
+                  popularText={t("pricing.popular")}
+                  totalText={t("totalPrice")}
+                  features={t.raw("planFeatures")}
+                  buttonText={t("buyNow")}
+                  href={whatsappUrl(
+                    t("planMessage", {
+                      plan: plan.duration,
+                      price: plan.price,
+                      currency: t("pricing.currency"),
+                    }),
+                  )}
                 />
+              ))}
+            </div>
+            <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-gray-300">
+              {t("pricingNote")}
+            </p>
+          </div>
+        </section>
+        <section className="bg-white/5 py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-10 text-center text-3xl font-bold">
+              {t("devices.title")}
+            </h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {["android", "firestick", "smarttv", "mobile", "pc"].map(
+                (device) => (
+                  <div
+                    key={device}
+                    className="rounded-2xl border border-white/10 p-5 text-center"
+                  >
+                    <p>{t(`devices.${device}`)}</p>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </section>
+        <section className="py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="mb-10 text-center text-3xl font-bold">
+              {t("stepsTitle")}
+            </h2>
+            <ol className="grid gap-6 md:grid-cols-3">
+              {steps.map((step, index) => (
+                <li
+                  key={step.title}
+                  className="rounded-2xl border border-white/10 p-6"
+                >
+                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-neon-purple/20 text-purple-200">
+                    {index + 1}
+                  </span>
+                  <h3 className="mb-3 text-xl font-bold">{step.title}</h3>
+                  <p className="leading-relaxed text-gray-300">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+        <section id="faq" className="bg-white/5 py-16">
+          <div className="mx-auto max-w-3xl px-4">
+            <h2 className="mb-8 text-center text-3xl font-bold">
+              {t("faqTitle")}
+            </h2>
+            <div className="space-y-4">
+              {faq.map((item) => (
+                <details
+                  key={item.q}
+                  className="rounded-xl border border-white/10 p-5"
+                >
+                  <summary className="cursor-pointer font-semibold">
+                    {item.q}
+                  </summary>
+                  <p className="mt-4 leading-relaxed text-gray-300">{item.a}</p>
+                </details>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Device Support Section */}
-        <section className="py-24 bg-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-12">{t('devices.title')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 opacity-70">
-              <div className="p-6 border border-white/10 rounded-2xl hover:bg-white/5 transition-colors">
-                <p className="font-bold">{t('devices.android')}</p>
-              </div>
-              <div className="p-6 border border-white/10 rounded-2xl hover:bg-white/5 transition-colors">
-                <p className="font-bold">{t('devices.firestick')}</p>
-              </div>
-              <div className="p-6 border border-white/10 rounded-2xl hover:bg-white/5 transition-colors">
-                <p className="font-bold">{t('devices.smarttv')}</p>
-              </div>
-              <div className="p-6 border border-white/10 rounded-2xl hover:bg-white/5 transition-colors">
-                <p className="font-bold">{t('devices.mobile')}</p>
-              </div>
-              <div className="p-6 border border-white/10 rounded-2xl hover:bg-white/5 transition-colors">
-                <p className="font-bold">{t('devices.pc')}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact CTA */}
-        <section id="contact" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 to-neon-red/20 -z-10"></div>
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
-            <p className="text-xl text-gray-300 mb-10">
-              Join thousands of happy customers and start streaming your favorite content now.
-            </p>
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              <NeonButton variant="purple" className="text-xl px-12 py-4">
-                Contact Us on WhatsApp
-              </NeonButton>
-            </a>
+        <section id="contact" className="py-16">
+          <div className="mx-auto max-w-3xl px-4 text-center">
+            <h2 className="mb-5 text-3xl font-bold">{t("contactTitle")}</h2>
+            <p className="mb-8 text-lg text-gray-300">{t("contactIntro")}</p>
+            <NeonButton href={whatsappUrl(t("contactMessage"))} external>
+              {t("contactButton")}
+            </NeonButton>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

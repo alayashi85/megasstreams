@@ -1,11 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RootPage() {
+  const router = useRouter();
   useEffect(() => {
-    window.location.href = '/en';
-  }, []);
+    router.replace("/en");
+  }, [router]);
 
   return (
     <html>
@@ -14,7 +17,9 @@ export default function RootPage() {
         <title>Redirecting...</title>
       </head>
       <body>
-        <p>Redirecting to <a href="/en">/en</a>...</p>
+        <p>
+          Redirecting to <Link href="/en">/en</Link>...
+        </p>
       </body>
     </html>
   );

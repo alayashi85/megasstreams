@@ -1,48 +1,110 @@
 {
   "Index": {
     "title": "Mega Streams - Premium IPTV Experience",
-    "description": "Unlock a world of entertainment with over 22,000+ live channels and 120,000+ VODs in 4K quality. Fast, reliable, and buffer-free.",
-    "getTrial": "Get 24h Free Trial",
-    "buyNow": "Buy Now",
+    "description": "Compare IPTV plans and request a trial to check your device and available content before subscribing.",
+    "getTrial": "Request a 24-hour trial",
+    "buyNow": "Request this plan",
     "features": {
-      "channels": "22,000+ Channels",
-      "vod": "120,000+ VOD",
-      "quality": "4K/8K Quality",
-      "antifreeze": "Anti-Freeze Tech",
-      "instant": "Instant Activation",
-      "support": "24/7 Live Support"
+      "channels": "Live channels",
+      "vod": "Video on demand",
+      "quality": "Check streaming quality",
+      "antifreeze": "Test on your connection",
+      "instant": "Activation assistance",
+      "support": "WhatsApp support"
     },
     "pricing": {
       "title": "Choose Your Plan",
-      "currency": "$",
+      "currency": "USD",
       "1month": "1 Month Plan",
-      "1monthPrice": "7",
+      "1monthPrice": "10.99",
       "3months": "3 Months Plan",
-      "3monthsPrice": "13",
+      "3monthsPrice": "19.99",
       "6months": "6 Months Plan",
-      "6monthsPrice": "20",
+      "6monthsPrice": "29.99",
       "12months": "12 Months Plan",
-      "12monthsPrice": "30",
-      "popular": "Most Popular"
+      "12monthsPrice": "44.99",
+      "popular": "Featured plan"
     },
     "devices": {
-      "title": "Works On All Your Devices",
+      "title": "Device compatibility",
       "android": "Android TV & Box",
       "firestick": "Amazon Firestick",
       "smarttv": "Smart TV (Samsung/LG)",
       "mobile": "iOS & Android Mobile",
       "pc": "Windows & Mac PC"
     },
-    "stats": {
-      "users": "10k+ Happy Users",
-      "uptime": "99.9% Uptime",
-      "channels": "22k+ Channels"
-    }
+    "featuresTitle": "Explore the service",
+    "featuresIntro": "Check content and compatibility during a trial before choosing a plan.",
+    "pricingIntro": "Choose a duration, then contact us to confirm details and payment.",
+    "totalPrice": "Total price for the selected duration",
+    "pricingNote": "Prices are in US dollars (USD). Confirm payment methods, renewal terms and simultaneous connections with support before paying.",
+    "contactTitle": "Need help before subscribing?",
+    "contactIntro": "Tell us your country and device to check compatibility and available content.",
+    "contactButton": "Contact us on WhatsApp",
+    "trialMessage": "Hello, I would like a 24-hour trial. My device: … My country: …",
+    "contactMessage": "Hello, I would like information about plans, device compatibility and payment methods.",
+    "planMessage": "Hello, I would like the {plan} at {price} {currency}. Please confirm simultaneous connections, renewal and refund terms, and payment methods.",
+    "planFeatures": [
+      "Check channels and content during a trial",
+      "Confirm your device compatibility",
+      "Setup assistance through WhatsApp"
+    ],
+    "stepsTitle": "How to get started",
+    "steps": [
+      {
+        "title": "Check your device",
+        "body": "Send support your device model and country of use."
+      },
+      {
+        "title": "Request a trial",
+        "body": "Check content and streaming quality on your own connection."
+      },
+      {
+        "title": "Confirm your plan",
+        "body": "Agree on payment, renewal, refund terms and connection limits before subscribing."
+      }
+    ],
+    "faqTitle": "Questions before subscribing",
+    "faq": [
+      {
+        "q": "Will it work on my device?",
+        "a": "Contact support with your device model and version. Use a trial to check compatibility before paying."
+      },
+      {
+        "q": "Which channels are available in my country?",
+        "a": "Ask support to confirm available content for your country. Availability may vary by region and plan."
+      },
+      {
+        "q": "Is 4K quality guaranteed?",
+        "a": "Quality depends on the source, device, application and connection speed. Test streaming on your device during a trial."
+      },
+      {
+        "q": "How many devices can stream at the same time?",
+        "a": "Confirm the permitted number of simultaneous connections with support before subscribing."
+      },
+      {
+        "q": "How do I pay, and does the plan renew automatically?",
+        "a": "Ask support about payment methods, renewal and refund terms before paying. A plan button opens WhatsApp and does not charge you."
+      }
+    ],
+    "footerDescription": "IPTV plans with help choosing a duration and checking device compatibility.",
+    "quickLinks": "Quick links",
+    "supportTitle": "Support",
+    "privacy": "Privacy",
+    "terms": "Subscription information",
+    "copyright": "All rights reserved.",
+    "skip": "Skip to content",
+    "metadataTitle": "Mega Streams | IPTV Plans & Device Trials"
   },
   "Navigation": {
     "home": "Home",
     "features": "Features",
     "pricing": "Pricing",
-    "contact": "Contact"
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "changeLanguage": "Change language",
+    "faq": "FAQ",
+    "mainNav": "Main navigation"
   }
 }

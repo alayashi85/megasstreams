@@ -1,6 +1,5 @@
-import React from 'react';
-import { LucideIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { LucideIcon } from "lucide-react";
 
 interface FeatureCardProps {
   icon: LucideIcon;
@@ -8,7 +7,11 @@ interface FeatureCardProps {
   description?: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  icon: Icon,
+  title,
+  description,
+}) => {
   return (
     <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-neon-purple/50 transition-all group">
       <div className="w-14 h-14 rounded-xl bg-neon-purple/20 flex items-center justify-center text-neon-purple mb-6 group-hover:scale-110 transition-transform">
